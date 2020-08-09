@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kirupa Basic Redux</title>
+    <script src="https://unpkg.com/redux@latest/dist/redux.js"></script>
+</head>
+<body>
+    <script>
+        // <!-- Action States -->
+        function addColor(value) {
+            return {
+            type: "ADD",
+            color: value
+            }
+        }
+        
+        function removeColor(value) {
+            return {
+            type: "REMOVE",
+            color: value
+            }
+        }
+
+        //<!-- Reducer -->
+        function favoriteColors(state, action) {
+            if (state === undefined) {
+              state = [];
+            }
+           //<!-- Both array.concat and array.filter returns a new array, so Redux's philosphy of non-mutation of state is followed -->
+            if (action.type === "ADD") {
+              return state.concat(action.color);
+            } else if (action.type === "REMOVE") {
+              return state.filter(function(item) {
+                return item !== action.color;
+              });
+            } else {
+              return state;
+            }
+        }
+
+        //<!-- Creating our store -->
+        var store = Redux.createStore(favoriteColors);
+
+        //<!-- Subscribe whenever our state gets updated -->
+        store.subscribe(render);
+        function render() {
+            console.log(store.getState());
+        }
+
+        //Run our app
+        //Add or remove colors using actions
+        store.dispatch(addColor("blue"));
+        store.dispatch(addColor("yellow"));
+        store.dispatch(addColor("green"));
+        store.dispatch(addColor("red"));
+        store.dispatch(addColor("gray"));
+        store.dispatch(addColor("orange"));
+        store.dispatch(removeColor("gray"));
+
+    </script>
+    
+</body>
+</html>

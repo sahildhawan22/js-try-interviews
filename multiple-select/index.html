@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <style>
+    select {
+      width: 100%;
+    }
+    .ms-drop ul>li{
+      padding-left: 5%;
+    }
+    .ms-drop ul>li.group,
+    .ms-select-all{
+      padding-left: 1.25rem !important;
+    }
+  </style>
+  <title>multiple-select example</title>
+</head>
+<body>
+
+  <div class="container">
+      <div class="clouds-type">
+        <div class="form-group row">
+          <label class="col-sm-2">
+            Dynamic
+          </label>
+      
+          <div class="col-sm-10">
+            <select id="group" multiple></select>
+          </div>
+        </div>
+      </div>
+
+      <div class="events-type">
+        <div class="form-group row">
+          <label class="col-sm-2">
+            Basic Object
+          </label>
+      
+          <div class="col-sm-10">
+            <select id="object" multiple></select>
+          </div>
+        </div>      
+      </div>
+     
+    </div>
+  </div>
+  
+
+
+<script>
+  let cloudGroup = [];
+  let eventTypes = {
+    "vivek_cspm_audit": "Security Posture",
+    "vivek_violation_cdd": "CDD Violations",
+    "vivek_activity": "Activities",
+    "vivek_anomaly": "Anomalies",
+    "vivek_activity_cdd": "CDD Activities",
+    "vivek_violation": "Violations"
+  };
+
+  let cloudsList = {
+    "Unmanaged Apps": [
+      {
+        "key": "224488576866",
+        "value": "SharePoint"
+      },
+      {
+        "key": "224488576824",
+        "value": "ActiveSync"
+      }
+    ],
+    "Managed Apps": [
+      {
+        "key": "224304166670",
+        "value": "mine.sharepoint"
+      },
+      {
+        "key": "224301459545",
+        "value": "OD_test"
+      },
+      {
+        "key": "226826196748",
+        "value": "one"
+      },
+      {
+        "key": "226826215251",
+        "value": "one.teams"
+      },
+      {
+        "key": "226700132432",
+        "value": "mine.teams"
+      },
+      {
+        "key": "226700131415",
+        "value": "mine.activesync"
+      },
+      {
+        "key": "226826643133",
+        "value": "two.teams"
+      },
+      {
+        "key": "227168692128",
+        "value": "AWSVivek"
+      },
+      {
+        "key": "226826621497",
+        "value": "two"
+      },
+      {
+        "key": "227168692247",
+        "value": "vs.activesync"
+      },
+      {
+        "key": "227168692228",
+        "value": "vs.owa"
+      },
+      {
+        "key": "226827022828",
+        "value": "three.sharepoint"
+      },
+      {
+        "key": "226827024734",
+        "value": "three.teams"
+      },
+      {
+        "key": "226827000527",
+        "value": "three"
+      },
+      {
+        "key": "226827023824",
+        "value": "three.onedrive"
+      },
+      {
+        "key": "223418207101",
+        "value": "klop"
+      },
+      {
+        "key": "227168692238",
+        "value": "vs.exchange"
+      },
+      {
+        "key": "225339841382",
+        "value": "CCProxy"
+      },
+      {
+        "key": "226833223265",
+        "value": "cdpsnow"
+      },
+      {
+        "key": "224301461328",
+        "value": "OD_test.exchange"
+      },
+      {
+        "key": "224301461755",
+        "value": "OD_test.teams"
+      },
+      {
+        "key": "224301460934",
+        "value": "OD_test.yammer"
+      },
+      {
+        "key": "224304166122",
+        "value": "mine"
+      },
+      {
+        "key": "224301461359",
+        "value": "OD_test.onedrive"
+      },
+      {
+        "key": "224301460963",
+        "value": "OD_test.sharepoint"
+      },
+      {
+        "key": "224304167034",
+        "value": "mine.onedrive"
+      },
+      {
+        "key": "227441021775",
+        "value": "BEX"
+      },
+      {
+        "key": "226908826221",
+        "value": "ssnow"
+      }
+    ]
+  }
+  
+  $(function() {
+    $('.multiple-select').multipleSelect({
+      filter: true
+    });
+    $("#object").multipleSelect({
+      data: eventTypes,
+      filter: true
+    });
+
+    cloudGroup = Object.keys(cloudsList).map(key => {
+      let entry = {};
+      entry["type"] = "optgroup";
+      entry["label"] = key;
+      let clouds = cloudsList[key];
+      children = [];
+      for(let i = 0; i < clouds.length; i++ ){
+        children.push({
+          text: clouds[i].value,
+          value: clouds[i].key
+        })
+      }
+      entry["children"] = children;
+      return entry;
+    });
+
+    console.log("cloudGroup: ", cloudGroup);
+    $("#group").multipleSelect({
+      data: cloudGroup,
+      filter: true
+    });
+  });
+</script>
+  
+</body>
+</html>
+
+<!-- 
+   {
+      type: 'optgroup',
+      label: 'Group 2',
+      children: [
+        {
+          text: 'July',
+          value: 7
+        },
+        {
+          text: 'August',
+          value: 8
+        }
+      ]
+    }
+ -->
