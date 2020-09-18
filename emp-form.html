@@ -52,24 +52,28 @@
         padding: 0.5em;
       }
       .btn-row > button {
-        background: #8b8045;
-        color: white;
         border: 0;
         border-radius: 3px;
         height: 30px;
         margin-right: 10px;
       }
-      .btn-row > button {
+      button:enabled {
+        background: #8b8045;
+        color: white;
+      }
+      .btn-row > button:hover:enabled {
         background: darkgoldenrod;
         color: white;
       }
-      .button:disabled {
+      .btn-row > .button:disabled {
         background-color: gray;
       }
       .danger {
         color: red;
       }
-      .validation-div {
+      .validation-div,
+      .years-div,
+      .hours-div {
         display: none;
       }
     </style>
@@ -81,7 +85,13 @@
       <div class="wrapper">
         <div class="form-row">
           <label for="name">Name</label>
-          <input type="text" id="name" required onkeyup="validateName()" />
+          <input
+            type="text"
+            name="name"
+            id="name"
+            onkeyup="validateName()"
+            required
+          />
         </div>
         <div class="form-row name-validation validation-div">
           <label></label>
@@ -111,6 +121,7 @@
               id="full_time"
               name="emp-type"
               value="full_time"
+              onclick="enableEmployeeType()"
               checked
             />
             <label for="full_time">Full Time</label>
@@ -120,6 +131,7 @@
               id="part_time"
               name="emp-type"
               value="part_time"
+              onclick="enableEmployeeType()"
             />
             <label for="part_time">Part Time</label>
 
@@ -128,12 +140,13 @@
               id="consultant"
               name="emp-type"
               value="consultant"
+              onclick="enableEmployeeType()"
             />
             <label for="consultant">Consultant</label>
           </div>
         </div>
 
-        <div class="form-row">
+        <div class="form-row years-div">
           <label for="years">Contract Years</label>
           <select name="yearsDropdown" id="yearsDropdown">
             <option value="1">1 year</option>
@@ -143,7 +156,7 @@
           </select>
         </div>
 
-        <div class="form-row">
+        <div class="form-row hours-div">
           <label for="hours">Contract Hours</label>
           <select name="hoursDropdown" id="hoursDropdown">
             <option value="4">4 hours</option>
@@ -421,22 +434,32 @@
     <br />
     <div class="output wrapper">
       <h4>Your submission:</h4>
-      <code class="jsonResult">
-        { name: "Sahil", Emp: "Permanent" }
-      </code>
+      <pre class="jsonResult"></pre>
     </div>
 
     <script>
       let submitBtn = document.querySelector("button[type='submit']");
+      let hoursDropdown = document.querySelector("#hoursDropdown");
+      let yearsDropdown = document.querySelector("#yearsDropdown");
+
+      document.querySelector("#emp-form").onsubmit = function (e) {
+        e.preventDefault();
+        formSubmit();
+      };
+
       function formSubmit() {
         let empForm = document.querySelector("#emp-form");
-        if (isValid()) {
-          alert("Form Submitted");
+        let formData = new FormData(empForm);
+        let jsonResult = {};
+        for (let [name, value] of formData) {
+          jsonResult[name] = value;
         }
-      }
-
-      function isValid() {
-        return true;
+        console.log(jsonResult);
+        document.querySelector(".jsonResult").innerHTML = JSON.stringify(
+          jsonResult,
+          null,
+          4
+        );
       }
 
       function validateDesc() {
@@ -471,6 +494,24 @@
 
       function activateSubmitBtn() {
         submitBtn.disabled = false;
+      }
+
+      function enableEmployeeType() {
+        let selectedRadio = document.querySelector(
+          "input[type='radio']:checked"
+        ).value;
+        let yearsDiv = document.querySelector(".years-div");
+        let hoursDiv = document.querySelector(".hours-div");
+        if (selectedRadio == "part_time") {
+          hoursDiv.style.display = "flex";
+          yearsDiv.style.display = "none";
+        } else if (selectedRadio == "consultant") {
+          yearsDiv.style.display = "flex";
+          hoursDiv.style.display = "none";
+        } else {
+          hoursDiv.style.display = "none";
+          yearsDiv.style.display = "none";
+        }
       }
     </script>
   </body>
