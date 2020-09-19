@@ -617,7 +617,7 @@
 
       function filterFunction() {
         let searchbox = document.querySelector(".searchbox");
-        let filter = searchbox.validateName.toLowerCase();
+        let filter = searchbox.value.toLowerCase();
         let options = document.querySelectorAll(".menu-item");
         for (const option of document.querySelectorAll(".menu-item")) {
           let textVal = option.textContent;
@@ -639,12 +639,27 @@
         jsonResult["countryCode"] = empForm
           .querySelector(".menu-item.selected")
           .getAttribute("data-value");
-        if (jsonResult.hasOwnProperty) console.log(jsonResult);
+
+        if (jsonResult["emp-type"] == "full_time") {
+          jsonResult["term"] = "";
+          delete jsonResult["yearsDropdown"];
+          delete jsonResult["hoursDropdown"];
+        } else if (jsonResult["emp-type"] == "part_time") {
+          jsonResult["term"] = jsonResult["hoursDropdown"] + " hours";
+          delete jsonResult["yearsDropdown"];
+          delete jsonResult["hoursDropdown"];
+        } else {
+          jsonResult["term"] = jsonResult["yearsDropdown"] + " years";
+          delete jsonResult["yearsDropdown"];
+          delete jsonResult["hoursDropdown"];
+        }
+
         document.querySelector(".jsonResult").innerHTML = JSON.stringify(
           jsonResult,
           null,
           4
         );
+        console.log(jsonResult);
       }
 
       function toggleDropdown(e) {
