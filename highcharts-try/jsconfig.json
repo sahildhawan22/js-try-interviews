@@ -1,0 +1,9 @@
+// For JQuery Intellisense
+{
+    "typeAcquisition": {
+        "include": [
+            "jquery"
+        ]
+    }
+
+}

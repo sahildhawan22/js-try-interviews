@@ -29,6 +29,6 @@ console.log(typeof e) */
 
 /* ---------------------- */
 
-const a = "" - 1 + 0
-const b = true + false
-console.log(b)
+const a = "" - 1 + 0;
+const b = true + false;
+console.log(b);

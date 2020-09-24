@@ -1,7 +1,7 @@
 /* let name = {
     firstName: "Sahil",
     lastName: "Dhawan",
-    //printFullName: () => console.log(`${this.firstName} ${this.lastName}`) //this doesn't work. why??
+    //printFullName: () => console.log(`${this.firstName} ${this.lastName}`) //this doesn't work. why?? Because arrow functions don't have their own 'this'
     printFullName: function(){
         console.log(this.firstName + " " + this.lastName)
     }
@@ -26,33 +26,34 @@ i.e here printFullName.call(name2) (of course, printFullName should be independe
 /* So this is how our resultant code will be */
 
 let name1 = {
-    firstName: "Sahil",
-    lastName: "Dhawan",
-}
+  firstName: "Sahil",
+  lastName: "Dhawan",
+};
 
 let name2 = {
-    firstName: "Kartik",
-    lastName: "Dhawan",
-}
+  firstName: "Kartik",
+  lastName: "Dhawan",
+};
 
 //let printFullName = () => console.log(`${this.firstName} ${this.lastName}` );
-let printFullName = function() {
-    console.log(`${this.firstName} ${this.lastName}`);
-}
+let printFullName = function () {
+  console.log(`${this.firstName} ${this.lastName}`);
+};
 
 printFullName.call(name1);
 printFullName.call(name2);
 
 //Application:
 
-let printDetails = function(city, state) {
-    console.log(`${this.firstName} ${this.lastName} lives in ${city}, ${state}.`);
-}
+let printDetails = function (city, state) {
+  console.log(`${this.firstName} ${this.lastName} lives in ${city}, ${state}.`);
+};
 
 printDetails.call(name1, "Mohali", "Punjab");
 
-/******  apply is similar to call, just args passed are different  *******/ 
-printDetails.apply(name2, ['Mohali', 'Punjab']);
+/******  apply is similar to call, just args passed are different  *******/
+
+printDetails.apply(name2, ["Mohali", "Punjab"]);
 
 /****** bind: bind returns the copy of the function which can be invoked later *******/
 let printDetailsLater = printDetails.bind(name1, "Mohali", "Punjab");

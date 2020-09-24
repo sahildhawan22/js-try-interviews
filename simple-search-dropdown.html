@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <script type="text/javascript">
+      function searchSel() {
+        var input = document.getElementById("realtxt").innerText.toLowerCase();
+        var output = document.getElementById("realitems").options;
+        for (var i = 0; i < output.length; i++) {
+          if (output[i].value.indexOf(input) == 0) {
+            output[i].selected = true;
+          }
+          if (document.getElementById("realtxt").value == "") {
+            output[0].selected = true;
+          }
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <form>
+      Search
+      <input
+        type="text"
+        id="realtxt"
+        placeholder="Search countries"
+        onkeyup="searchSel()"
+      />
+      <select id="realitems">
+        <option value="">Select...</option>
+        <option value="af">Afghanistan</option>
+        <option value="al">Albania</option>
+        <option value="alg">Algeria</option>
+        <option value="and">Andorra</option>
+        <option value="ang">Angola</option>
+        <option value="ind">India</option>
+        <option value="uk">United Kingdom</option>
+      </select>
+    </form>
+  </body>
+</html>

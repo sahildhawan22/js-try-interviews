@@ -1,3 +1,10 @@
+<!-- 
+  1. Please open this page in latest version of modern browsers (Chrome Version 85.0.4183.102) to support flexbox (especially inline-flex) and HTML5 FormData. Since this page has been built up in pure HTML5, CSS3 and Javascript, to make things a bit easier such properties are used.
+  2. Since no libraries have been used, it took me around 3.5-4 hours to do DOM manipulation using plain JS and all the custom CSS.
+  3. Initially Submit button of form would be disabled, as nothing is entered in Name form field. As the user enters something in the form field, the button would get activated. The respective validation messages would appear below name and textarea form fields.
+  4. To improve things, I would have implemented debouncing functionality on keyup for searching in custom dropdown and applying validations.
+ -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -573,6 +580,7 @@
       let hoursDropdown = document.querySelector("#hoursDropdown");
       let yearsDropdown = document.querySelector("#yearsDropdown");
 
+      //To close dropdown when clicked outside it.
       window.onclick = function (e) {
         let openedDropdown = document.querySelector(".dropdown-content");
         if (
@@ -592,22 +600,15 @@
         }
       };
 
+      //Adding event listener on every list-item of custom dropdown.
       for (const option of document.querySelectorAll(".menu-item")) {
         option.addEventListener("click", function () {
-          console.log("this inside option.addEventListener: ", this);
+          //console.log("this inside option.addEventListener: ", this); //this refers to li thatwas clicked
           if (!this.classList.contains("selected")) {
-            console.log(
-              "this.parentNode.querySelector('.menu-item.selected'): ",
-              this.parentNode.querySelector(".menu-item.selected")
-            );
             this.parentNode
               .querySelector(".menu-item.selected")
               .classList.remove("selected");
             this.classList.add("selected");
-            console.log(
-              "this.closest('.dropdown-row').querySelector('.dropbtn')",
-              this.closest(".dropdown-row").querySelector(".dropBtn")
-            );
             this.closest(".dropdown-row").querySelector(
               ".dropbtn-text"
             ).textContent = this.textContent;
@@ -615,6 +616,7 @@
         });
       }
 
+      //Search functionality
       function filterFunction() {
         let searchbox = document.querySelector(".searchbox");
         let filter = searchbox.value.toLowerCase();
@@ -629,6 +631,7 @@
         }
       }
 
+      //Will execute once form is validated
       function formSubmit() {
         let empForm = document.querySelector("#emp-form");
         let formData = new FormData(empForm);
@@ -662,10 +665,12 @@
         console.log(jsonResult);
       }
 
+      //To toggle between showing and hiding dropdown list
       function toggleDropdown(e) {
         document.querySelector(".dropdown-content").classList.toggle("show");
       }
 
+      //For validating description textarea:
       function validateDesc() {
         let descInput = document.querySelector("#description");
         let descValidationDiv = document.querySelector(".desc-validation");
@@ -681,6 +686,7 @@
         }
       }
 
+      //For validating name form-field:
       function validateName() {
         let nameInput = document.querySelector("#name");
         let nameValidationDiv = document.querySelector(".name-validation");
@@ -704,6 +710,7 @@
         submitBtn.disabled = false;
       }
 
+      //To display type of employee type dropdown based on radio button selection
       function enableEmployeeType() {
         let selectedRadio = document.querySelector(
           "input[type='radio']:checked"

@@ -1,0 +1,73 @@
+<!doctype html>
+<title>Example</title>
+<style>
+    .title {
+        font-family: sans-serif;
+        color: #8b8045;
+    }
+  .wrapper {
+    background-color: whitesmoke;
+    list-style-type: none;
+    padding: 0;
+    border-radius: 3px;
+  }
+  .form-row {
+    display: flex;
+    justify-content: flex-start;
+    padding: .5em;
+  }
+  .form-row > label {
+    padding: .5em 1em .5em 0;
+    flex: 1;
+  }
+  .form-row > input {
+    flex: 2;
+  }
+  .radio-row {
+    flex: 1;
+  }
+  .form-row > input,
+  .form-row > button {
+    padding: .5em;
+  }
+  .form-row > button {
+   background: #8b8045;
+   color: white;
+   border: 0;
+  }
+</style>
+<h2 class="title">Employee Form</h2>
+<hr />
+<form>
+  <div class="wrapper">
+    <div class="form-row">
+      <label for="name">Name</label>
+      <input type="text" id="name">
+    </div>
+    <div class="form-row">
+      <label for="townborn">Town you were born in</label>
+      <input type="text" id="townborn">
+    </div>
+    <div class="form-row">
+      <label for="email">Email Address</label>
+      <input type="email" id="email">
+    </div>
+    <div class="form-row">
+        <label>Select a maintenance drone:</label>
+            <div class="radio-row">
+                <input type="radio" id="huey" name="drone" value="huey"
+                        checked>
+                <label for="huey">Huey</label>
+            
+                <input type="radio" id="dewey" name="drone" value="dewey">
+                <label for="dewey">Dewey</label>
+
+                <input type="radio" id="louie" name="drone" value="louie">
+                <label for="louie">Louie</label>
+            </div>
+    </div>
+    <div class="form-row">
+        <button type="submit">Submit</button>
+    </div>
+  </div>
+</form>
