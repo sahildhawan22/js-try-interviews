@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Loop</title>
+  </head>
+  <body>
+    <p>Event Loop testing</p>
+    <button type="button">Click Me!</button>
+
+    <script>
+      document.querySelector("button").addEventListener("click", function (e) {
+        setTimeout(function timer() {
+          console.log("You clicked the button!");
+        }, 15000);
+      });
+
+      console.log("Hi!");
+
+      setTimeout(function timeout() {
+        console.log("Click the button Mister :/");
+      }, 6000);
+
+      console.log("Weclome to the Event Loop");
+    </script>
+  </body>
+</html>
+
+<!-- 
+  $.on('button', 'click', function onClick() {
+    setTimeout(function timer() {
+        console.log('You clicked the button!');    
+    }, 2000);
+});
+
+console.log("Hi!");
+
+setTimeout(function timeout() {
+    console.log("Click the button!");
+}, 5000);
+
+console.log("Welcome to loupe.");
+ -->

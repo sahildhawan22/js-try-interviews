@@ -1,16 +1,23 @@
-/* let name = "Mark";
+let name = "Mark";
 
 let user = {
     name: "John",
     hi() {
-        return this.name
-    }
-}
+        return this.name;
+    },
+};
+
+console.log("user.hi(): ", user.hi());
 
 let hi = user.hi;
 let username = hi();
+console.log("username: ", hi());
 
-console.log(username) */
+let userContext = hi.apply(user);
+console.log("usercontext: ", userContext);
+console.log(username);
+
+//undefined at 2nd line maybe because let hi is in global scope and no hi() method in global scope
 
 /* --------------------- */
 
@@ -29,6 +36,6 @@ console.log(typeof e) */
 
 /* ---------------------- */
 
-const a = "" - 1 + 0;
+/* const a = "" - 1 + 0;
 const b = true + false;
-console.log(b);
+console.log(b); */

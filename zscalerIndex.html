@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <ul class="animals"></ul>
+    <script src="./zscaler.js"></script>
+    <script>
+      let ul = document.querySelector(".animals");
+      for (let i = 0; i < catGroup.length; i++) {
+        let li = document.createElement("li");
+        let text = JSON.stringify(catGroup[i]);
+        li.innerText = text;
+        ul.appendChild(li);
+      }
+      for (let i = 0; i < birdGroup.length; i++) {
+        let li = document.createElement("li");
+        let text = JSON.stringify(birdGroup[i]);
+        li.innerText = text;
+        ul.appendChild(li);
+      }
+    </script>
+  </body>
+</html>

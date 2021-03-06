@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Progressbar</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: papayawhip;
+      }
+      hr {
+        color: brown;
+      }
+      h2 {
+        color: #ae0303;
+        text-align: center;
+        text-decoration: wavy;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+        margin: 0.5em;
+        margin-top: 40vh;
+      }
+      .box {
+        width: 200px;
+        height: 20px;
+      }
+      .progress-text {
+        color: white;
+      }
+      .progress-complete {
+        text-align: center;
+        width: 1%;
+        background-color: green;
+        color: white;
+      }
+      progress {
+        width: 200px;
+        height: 30px;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Progressbars baby!</h2>
+    <hr />
+    <div class="container">
+      <div class="box">
+        <div class="progress-complete"></div>
+      </div>
+      <div class="html5-progress">
+        <progress value="22" max="100"></progress>
+      </div>
+    </div>
+    <script>
+      let width = 0;
+      const progressbar = document.querySelector(".progress-complete");
+      const html5Progress = document.querySelector("progress");
+      let intervalId = setInterval(fillProgressBar, 20);
+      function fillProgressBar() {
+        if (width == 100) {
+          clearInterval(intervalId);
+        } else {
+          width++;
+          progressbar.style.width = width + "%";
+          document.querySelector("progress").value = width;
+          document.querySelector(".progress-complete").innerHTML = width + "%";
+          html5Progress.innerHTML = width + "%";
+        }
+      }
+    </script>
+  </body>
+</html>

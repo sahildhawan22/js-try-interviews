@@ -61,3 +61,29 @@ let printDetailsLater = printDetails.bind(name1, "Mohali", "Punjab");
 console.log(printDetailsLater);
 //Invoke the bound function
 printDetailsLater();
+
+/* 
+In Summary:
+
+let sahil = {
+  fname: "Sahil",
+  lname: "Dhawan",
+};
+
+let kartik = {
+  fname: "Kartik",
+  lname: "Dhawan",
+};
+
+let printFullName = function (city, state) {
+  console.log(`${this.fname} ${this.lname} lives in ${city}, ${state}.`);
+};
+
+printFullName.call(kartik, "Chandigarh", "Chandigarh");
+
+printFullName.apply(sahil, ["Mohali", "Punjab"]);
+
+let boundPrint = printFullName.bind(kartik, "Chandigarh", "Punjab");
+console.log("Bound function: ", boundPrint);
+boundPrint();
+*/

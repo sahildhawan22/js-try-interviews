@@ -1,0 +1,174 @@
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <link href="introjs.css" rel="stylesheet">
+      <style type="text/css">
+      	.main_container{
+      		width: 800px;
+      		margin: auto;
+      		
+      	}
+
+      	li{
+      		list-style: none;
+      		margin: 5px;
+      	}
+
+      	form{
+      		background: none repeat scroll 0 0 #EEEEEE;
+      		border: 1px solid #CFCFCF;
+      		padding: 10px;
+      	}
+      	label{
+      		padding: 10px;
+      		width: 150px;
+      	}
+      	input[type='text'],select,input[type='file']{
+      		background: #fff;
+      		padding: 3px;
+      		width: 150px;
+      		border: 1px solid #cfcfcf;
+      	}
+
+      	.left{
+      		float: left;
+      		width: 200px;
+      	}
+
+        .error{
+          background: none repeat scroll 0 0 #FFE3E4 !important;
+          border: 1px solid #EF9C9C !important;
+        }
+
+        .right{
+          display: none;
+          float: right;
+        }
+
+        #form_actions{
+          display: none;
+          float: left;
+          margin-top:20px;
+        }
+
+        #download,#purchase,#documentation{
+            background: none repeat scroll 0 0 #5880D6;
+            color: #FFFFFF;
+            float: left;
+            font-weight: bold;
+            margin: 5px;
+            padding: 20px;
+            text-align: center;
+            width: 210px;
+
+        }
+
+	.flexi_form_title{
+	    text-align:center;
+	    margin-top:30px;
+	    font-size:40px;
+	}
+
+	#flexi_form_start{
+	   background: none repeat scroll 0 0 #1C62D2;
+    		color: #FFFFFF;
+    		padding: 20px;
+		margin-bottom:20px;
+	}
+      </style>
+    </head>
+
+    <body>
+
+    	<div class='main_container'>
+  	  	<div class="flexi_form_title">
+  	        <h1 data-step="1" data-intro="This is flexible forms tour">Flexible Forms</span></h1>
+  	        <a id="flexi_form_start" href="javascript:void(0);">Start Tour</a>
+  	    </div>
+
+  	    <div id="form_container">
+     	<form class="flexi_form" data-step="2" data-intro="Flexible form default layout with multiple field types" style="display:none"  data-position="bottom">
+  			    		<ul>
+  			    			<li data-step="3" data-position="left" data-intro="Inline form validation" >
+                    <div class='left'>Text Field</div><input type='text' />
+                  </li>
+  			    			<li data-step="4" data-intro="Customizable Form Layouts" ><div class='left'>Dropdown Field</div>
+  			    				<select>
+  			    					<option>Option 1</option>
+  			    					<option>Option 2</option>
+  			    				</select>
+  			    			</li>
+  			    			<li data-step="5" data-intro="Guidence for filling forms">
+                    <div class='left'>File Field</div><input type='file' />
+                    <div class='right'>Please Upload PDF Files</div>
+                  </li>
+  			    			<li><div class='left'>Checkboxes</div><input type='checkbox' /><input type='checkbox' /></li>
+  			    			<li><div class='left'>Dropdown Field</div>
+  			    				<select>
+  			    					<option>Option 1</option>
+  			    					<option>Option 2</option>
+  			    				</select>
+  			    			</li>
+  			    		</ul>
+  	</form>
+  	</div>
+
+  	<div id="form_actions" data-step="6" data-intro="What do you like to do?">
+  		<div id="download" data-step="7" data-intro="Get a free trial version">Download</div>
+  		<div id="documentation" data-step="8" data-intro="Learn how to use flexi froms">View Documentation</div>
+  		<div id="purchase" data-step="9" data-intro="View packages and offers">Purchase</div>
+  	</div>
+
+
+  	</div>
+
+  	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    	<script type="text/javascript" src="intro.js"></script>
+      <script type="text/javascript">
+        $('#flexi_form_start').click(function() {
+          introJs().start().oncomplete(function() {
+            window.location.href = 'complete.html';
+          }).onexit(function() {
+            window.location.href = 'complete.html';
+          }).onbeforechange(function(targetElement) { 
+          	$(".steps").hide(); 
+    			
+
+          $(".left").css("float","left");
+          $("input").removeClass("error");
+          $(".right").hide();
+
+          
+
+  			switch($(targetElement).attr("data-step")){
+
+          case '2':
+            $(".flexi_form").hide();
+            $(targetElement).show();    
+            break;
+  				case '3':
+  					$("input").addClass("error");
+            $(targetElement).show();
+  					break;
+
+          case '4':
+            $(".left").css("float","none");
+            $(targetElement).show();
+            break;
+
+          case '5':
+            $(".right").show();
+            $(targetElement).show();
+            break;
+
+          case '6':
+            $(targetElement).show();
+            break;
+  			}
+  		});
+        });
+
+      </script>
+
+    </body>
+  </html>
